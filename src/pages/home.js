@@ -27,7 +27,7 @@ export default function Home(){
     }
 
     return (
-            <div className="dark">
+            <div className="px-8 py-12 mx-auto">
                 <PokemonSearch setPokemonName={setPokemonName} />
                 <PokemonGrid pokemonName={pokemonName} pokemons={pokemons} /> 
             </div>

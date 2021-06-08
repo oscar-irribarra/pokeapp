@@ -20,7 +20,7 @@ export default function PokemonGrid({pokemonName: name = '', pokemons = []}) {
     }
 
     return (
-        <div className="flex flex-wrap justify-center mt-5">
+        <div className="flex flex-row flex-wrap mt-5 items-center">
             {filterPokemons.map(pokemon => ( <PokemonCard key={pokemon.id} {...pokemon} /> ))}
         </div>
     )
