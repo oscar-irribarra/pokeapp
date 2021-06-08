@@ -5,7 +5,7 @@ import PokemonSearch from '../components/pokemonSearch';
 
 export default function Home(){
 
-    const [ pokemonName, setPokemon ] = useState('');
+    const [ pokemonName, setPokemonName ] = useState('');
     const [ pokemons, setPokemons ] = useState([]);
 
     useEffect(() => {
@@ -13,12 +13,12 @@ export default function Home(){
     }, []);
     
     const fetchPokemon = async () => {
-        const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10', { headers: { 'Content-Type': 'application/json' } });
+        const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100', { headers: { 'Content-Type': 'application/json' } });
         const data = await res.json();
         const pokemons = data.results.map(({name}, index) => {
             return {
                 id: index,
-                name: name[0].toUpperCase()+name.substr(1),
+                name: name,
                 image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png`
             }
         });
@@ -27,8 +27,8 @@ export default function Home(){
     }
 
     return (
-            <div className="flex flex-wrap justify-center">
-                <PokemonSearch setPokemon={setPokemon} />
+            <div className="dark">
+                <PokemonSearch setPokemonName={setPokemonName} />
                 <PokemonGrid pokemonName={pokemonName} pokemons={pokemons} /> 
             </div>
     )

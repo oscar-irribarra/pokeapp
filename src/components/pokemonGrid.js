@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import PokemonCard from './pokemonCard';
 
-export default function PokemonGrid({pokemonName = '', pokemons = []}) {
+export default function PokemonGrid({pokemonName: name = '', pokemons = []}) {
+    console.log(name)
+    
     const [filterPokemons, setfilterPokemons] = useState([...pokemons]);
-    console.log(pokemonName);
+
     useEffect(()=>{
-        filtered(pokemonName, pokemons);
-    }, [pokemonName, pokemons]);
+        filtered(name, [...pokemons]);
+    }, [name, pokemons]);
 
     const filtered = (name, pokemons = []) => {
-        if(name.length !== 0){
-            setfilterPokemons(pokemons);
-        }else{
-            const pokemonFIlter = pokemons.filter(pokemon => String(pokemon).includes(String(name)));
+        if(name.length > 0){
+            const pokemonFIlter = pokemons.filter(pokemon => pokemon.name.toLowerCase().includes(name.toLowerCase()));
             setfilterPokemons(pokemonFIlter);
+        }else{
+            setfilterPokemons(pokemons);
         }
     }
-
 
     return (
         <div className="flex flex-wrap justify-center mt-5">
